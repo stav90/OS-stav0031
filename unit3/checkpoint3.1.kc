@@ -12,6 +12,7 @@ const char BLACK = 0;
 const char WHITE = 1;
 
 char[] MESSAGE = "stav0031 operating system starting";
+char[] MESSAGE2 = "testing hardware";
 
 
 unsigned char* current_screen_line = $0400;
@@ -26,17 +27,17 @@ void print_to_screen(char *message){
 		current_screen_x++;
 		
 		if(current_screen_x > 39){
-		current_screen_x = 0;
-		current_screen_line += 40;
-		}
-		
+		print_newline();
+		}	
 	}
 }
 
 
 
 void print_newline(){
-	
+
+	current_screen_line += 40 - current_screen_x;
+		current_screen_x = 0;
 }
 
 
@@ -362,6 +363,7 @@ void RESET(){
 
   char* sc = SCREEN+40;
   char* msg = MESSAGE;
+  char* msg2 = MESSAGE2;
   
 
 	//while(*msg){
@@ -378,6 +380,7 @@ void RESET(){
  
  print_to_screen(msg);
  print_newline();
+ print_to_screen(msg2);
  
   exit_hypervisor();
 }
