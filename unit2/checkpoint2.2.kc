@@ -13,27 +13,9 @@ const char WHITE = 1;
 
 char[] MESSAGE = "checkpoint 2.2 by stav0031";
 
-void main() {
-  *VIC_MEMORY = 0x14;
 
-  memset(SCREEN, ' ', 40*25);
-  memset(COLS, WHITE, 40*25);
 
-  char* sc = SCREEN+40;
-  char* msg = MESSAGE;
 
- while(*msg){
-  *sc++ = *msg++;
- }
-
- while(true){
-  if(*RASTER==54 || *RASTER==66){
-    *BGCOL = WHITE;
-  }else{
-    *BGCOL = BLACK;
-  }
- }
-}
 
 void syscall00(){
   *(SCREEN+79) = '}';
@@ -350,8 +332,30 @@ void syscall3F(){
 }
 
 void RESET(){
-  *(SCREEN+78) = '{';
+ *VIC_MEMORY = 0x14;
+
+  memset(SCREEN, ' ', 40*25);
+  memset(COLS, WHITE, 40*25);
+
+  char* sc = SCREEN+40;
+  char* msg = MESSAGE;
+  
+
+ while(*msg){
+  *sc++ = *msg++;
+  }
+  
+   while(true){
+  if(*RASTER==54 || *RASTER==66){
+    *BGCOL = WHITE;
+  }else{
+    *BGCOL = BLACK;
+  }
+ }
   exit_hypervisor();
+}
+
+void main(){
 }
 
 void PAGFAULT(){
