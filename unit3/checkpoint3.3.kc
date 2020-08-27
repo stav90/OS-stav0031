@@ -87,6 +87,50 @@ volatile unsigned char *p;
 	print_to_screen("finished testing hardware");
 }
 
+char detect_VICII(unsigned short address){
+  char found = 0;
+  volatile unsigned char *p;
+  unsigned char v1,v2;
+  unsigned short i;
+  
+  v1=p[$12];
+  
+  //wait at least 64 mircoseconds
+  
+  for(i=1; i<1000; i++) continue;
+  
+  v2=p[$12]; 
+
+  if (v2 > v1 ) {
+    found = 1;
+		print_to_screen("VICII was found at $");
+		print_hex((unsigned short)p);
+  }
+
+  return found;
+}
+
+///////////////////detect devices//////////////////////////
+void detect_devices(){
+
+unsigned short mem_start = $D000;
+unsigned short mem_end = $DFF0;
+
+
+
+
+	for(p = mem_start; p < mem_end; p + $10){
+	
+		char found;
+		//call hardware detection function..returns char
+		found = detect_VICII(p);
+	}
+	if(found == 0){
+			print_to_screen("device was not found!");
+	}
+	print_to_screen("finished probing for devices");
+}
+
 void syscall00(){
   *(SCREEN+79) = '}';
   exit_hypervisor();
