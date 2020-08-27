@@ -78,11 +78,12 @@ volatile unsigned char *p;
 					
 		}
 	
-	
+	print_newline();
 	print_to_screen("memory found at ");
 	print_hex(mem_start);
 	print_to_screen(" - ");
 	print_hex(mem_end);
+	print_newline();
 	print_to_screen("Finished Testing Hardware");
 }
 
