@@ -68,6 +68,8 @@ volatile unsigned char *p;
 				for(value = 0; value < 255; value++){ 
 					*p = value;
 					
+					
+					
 					if (*p != value) {
 						print_to_screen("the value is $");
 						print_hex((unsigned short)p);
@@ -77,7 +79,7 @@ volatile unsigned char *p;
 		}
 	
 	
-
+	print_to_screen("done");
 }
 
 void syscall00(){
