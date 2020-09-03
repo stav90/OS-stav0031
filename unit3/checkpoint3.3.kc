@@ -56,25 +56,25 @@ void print_hex(unsigned short value){
 //////////////////////mem test////////////////////////
 
 void test_memory(){
-unsigned short mem_start = $0800;
-unsigned short mem_end = $8000;
+	unsigned short mem_start = $0800;
+	unsigned short mem_end = $8000;
 
-//write values to mem location between $0800 - $7FFF
-volatile unsigned char *p;
-	
+	//write values to mem location between $0800 - $7FFF
+	volatile unsigned char *p;
+		
 		for(p = mem_start; p < mem_end; p++){
 			unsigned char value;
 	
-				for(value = 0; value < 255; value++){ 
-					*p = value;
-					
-					
-					
-					if (*p != value) {
-						print_to_screen("the value is $");
-						print_hex((unsigned short)p);
-					}
-				}	
+			for(value = 0; value < 255; value++){ 
+				*p = value;
+				
+				
+				
+				if (*p != value) {
+					print_to_screen("the value is $");
+					print_hex((unsigned short)p);
+				}
+			}	
 					
 		}
 	
@@ -87,9 +87,9 @@ volatile unsigned char *p;
 	print_to_screen("finished testing hardware");
 }
 
-char detect_VICII(unsigned short address){
+char detect_VICII(unsigned char *address){
   char found = 0;
-  volatile unsigned char *p;
+  volatile unsigned char *p = address;
   unsigned char v1,v2;
   unsigned short i;
   
@@ -101,7 +101,7 @@ char detect_VICII(unsigned short address){
   
   v2=p[$12]; 
 
-  if (v2 > v1 ) {
+  if (v2 != v1 ) {
     found = 1;
 		print_to_screen("VICII was found at $");
 		print_hex((unsigned short)p);
@@ -112,19 +112,18 @@ char detect_VICII(unsigned short address){
 
 ///////////////////detect devices//////////////////////////
 void detect_devices(){
+  volatile unsigned char *p;
+	unsigned short dev_start = $D000;
+	unsigned short dev_end = $DFF0;
+	char found;
 
-unsigned short mem_start = $D000;
-unsigned short mem_end = $DFF0;
-
-
-
-
-	for(p = mem_start; p < mem_end; p + $10){
+	for(p = dev_start; p < dev_end; p += 10){
 	
-		char found;
+		
 		//call hardware detection function..returns char
 		found = detect_VICII(p);
 	}
+	
 	if(found == 0){
 			print_to_screen("device was not found!");
 	}
