@@ -119,7 +119,7 @@ void detect_devices(){
 		char found = detect_VICII(p);	
 		
 		if (found) {
-			print_to_screen("tfgdf $");
+			print_to_screen("found VICII at $");
 					print_hex((unsigned short)p);
 		}
 	}
