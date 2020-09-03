@@ -88,7 +88,6 @@ void test_memory(){
 }
 
 char detect_VICII(unsigned char *address){
-  char found = 0;
   volatile unsigned char *p = address;
   unsigned char v1,v2;
   unsigned short i;
@@ -101,13 +100,11 @@ char detect_VICII(unsigned char *address){
   
   v2=p[$12]; 
 
-  if (v2 != v1 ) {
-    found = 1;
-		print_to_screen("VICII was found at $");
-		print_hex((unsigned short)p);
+  if (v1 != v2 ) {
+    return 1;
   }
-
-  return found;
+	
+  return 0;
 }
 
 ///////////////////detect devices//////////////////////////
@@ -115,13 +112,15 @@ void detect_devices(){
   volatile unsigned char *p;
 	unsigned short dev_start = $D000;
 	unsigned short dev_end = $DFF0;
-	char found;
+
 
 	for(p = dev_start; p < dev_end; p += 10){		
 		//call hardware detection function..returns char
-		found = detect_VICII(p);
-		if(found == 0){
-			print_to_screen("device was not found!");
+		char found = detect_VICII(p);	
+		
+		if (found) {
+			print_to_screen("tfgdf $");
+					print_hex((unsigned short)p);
 		}
 	}
 	print_to_screen("finished probing for devices");
