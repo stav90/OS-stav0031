@@ -16,8 +16,8 @@ char[] MESSAGE = "checkpoint 4.1 by stav0031";
 
 void start_simple_program(){
 		
-	unsigned short p* = $D648;
-
+	*(unsigned char *)$0300 = $80;
+	
 	*(unsigned char *)$0300 = $80;
 	*(unsigned char *)$0301 = $00;
 	*(unsigned char *)$0302 = $81;
