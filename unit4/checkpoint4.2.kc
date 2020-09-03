@@ -392,7 +392,7 @@ void RESET(){
   memset(COLS, WHITE, 40*25);
 
   print_to_screen(MESSAGE);
-  print_newline();
+
   
   start_simple_program();	
  	
