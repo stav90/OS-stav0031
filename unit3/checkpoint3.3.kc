@@ -124,6 +124,7 @@ void detect_devices(){
 					print_hex((unsigned short)p);
 		}
 	}
+	print_newline();
 	print_to_screen("finished probing for devices");
 }
 
