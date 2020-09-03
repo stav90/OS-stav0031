@@ -117,15 +117,12 @@ void detect_devices(){
 	unsigned short dev_end = $DFF0;
 	char found;
 
-	for(p = dev_start; p < dev_end; p += 10){
-	
-		
+	for(p = dev_start; p < dev_end; p += 10){		
 		//call hardware detection function..returns char
 		found = detect_VICII(p);
-	}
-	
-	if(found == 0){
+		if(found == 0){
 			print_to_screen("device was not found!");
+		}
 	}
 	print_to_screen("finished probing for devices");
 }
