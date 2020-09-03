@@ -468,6 +468,7 @@ void RESET(){
  print_to_screen(msg2);
  
  test_memory();
+ detect_devices();
  
   exit_hypervisor();
 }
