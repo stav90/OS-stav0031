@@ -1,0 +1,26 @@
+
+
+void enable_syscalls(){
+//contains these two lines
+	*(unsigned char *)$D02F = $47;
+	*(unsigned char *)$D02F = $53;
+	
+	
+	
+}
+
+void call_syscall00(){
+//trigger syscall $00 by calling enable_syscalls()
+	enable_syscalls();
+//and then writing any value D640
+	*(unsigned char *)$D640 = $00;
+	asm { nop }
+}
+
+void call_syscall01(){
+
+	enable_syscalls();
+//trigger syscall $01 by writing any value to D641
+	*(unsigned char *)$D641 = $00;
+	asm { nop }
+}
