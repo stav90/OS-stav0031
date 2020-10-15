@@ -26,6 +26,7 @@ const unsigned char STATE_READYSUSPENDED = $03;
 const unsigned char STATE_BLOCKEDSUSPENDED = $04;
 const unsigned char STATE_BLOCKED = $05;
 const unsigned char STATE_RUNNING = $06;
+const unsigned char STATE_NOTRUNNING = $00;
 const unsigned char STATE_EXIT = $07;
 
 // Process Descriptor Block definition
@@ -204,8 +205,8 @@ void resume_pdb(unsigned char pdb_number)///////////////////////////////////////
         //-- ((unsigned char *)$D640)[62] (dma_copy doesn't work for this for some slightly
         //complex reasons.)
 
-	for(int i = 0; i <= 61; i++){
-		((unsigned char*)$D640)[i] = *ss[i];
+	for(short i = 0; i < 62; i++){
+		((unsigned char*)$D640)[i] = ss[i];
 	}
 
   // Set state of process to running
@@ -754,7 +755,7 @@ void RESET(){
     print_newline();
 
     initialise_pdb(0,"program1.prg");
-    load_program();
+    load_program(0);
     resume_pdb(0);
     describe_pdb(0);
 
