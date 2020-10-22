@@ -842,13 +842,13 @@ void RESET(){
   memset(COLS, WHITE, 40*25);
 
   char* sc = SCREEN+40;
-  char* msg = MESSAGE;
+  //char* msg = MESSAGE;
   //char* msg2 = MESSAGE2;
   
 	//print_to_screen(msg);
- 	while(*msg){
-	  *sc++ = *msg++;
-  }
+ 	//while(*msg){
+	  //*sc++ = *msg++;
+  //}
  	
  	  current_screen_line = SCREEN;
     print_newline();
